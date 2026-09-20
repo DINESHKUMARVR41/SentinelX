@@ -1,0 +1,32 @@
+# Core Dependencies
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic>=2.5.3
+pydantic-settings==2.1.0
+
+# Database
+aiosqlite==0.19.0
+
+# Process Monitoring
+psutil>=5.9.8
+pywin32==311; sys_platform == "win32"  # For WMI on Windows
+WMI>=1.5.1; sys_platform == "win32"    # Windows Management Instrumentation for event-based monitoring
+
+# Gemini AI - New SDK (Gemini 3 requires 1.51.0+)
+google-genai>=1.51.0
+
+# Evidence Collection
+python-dateutil==2.8.2
+pytz==2024.1
+
+# Utilities
+python-dotenv==1.0.0
+httpx==0.28.1
+websockets==13.0
+
+# Development
+pytest==7.4.4
+pytest-asyncio==0.23.3
+black==24.1.1
+
+PyYAML>=6.0

@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+.kiro
+
+# Environment
+.env
+.env.local
+
+# Database
+*.db
+*.db-*
+*.db-journal
+database/*.db
+
+# Evidence Storage
+evidence_storage/
+!evidence_storage/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node
+node_modules/
+dashboard/dist/
+dashboard/build/
+dashboard/.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,64 @@
+# PROCSee Configuration
+# AI-powered security monitoring with Gemini 2.5 Flash
+
+agent:
+  # Automatically investigate triggered processes
+  auto_investigate: true
+  
+  # Maximum concurrent investigations
+  max_concurrent_investigations: 3
+  
+  # State checkpoint interval for resume capability
+  checkpoint_interval_seconds: 60
+
+# Storage Management (Size-Based)
+# Raw process events are automatically cleaned up when database approaches 1GB
+storage:
+  max_database_size_mb: 1024      # 1GB maximum
+  cleanup_threshold_mb: 900       # Start cleanup at 900MB
+  cleanup_amount_mb: 100          # Delete 100MB of oldest data
+  # Note: Active investigation data is NEVER deleted
+
+# Risk score thresholds (0.0 - 1.0 scale)
+risk_thresholds:
+  low: 0.3      # 30% - Benign with minor concerns
+  medium: 0.5   # 50% - Suspicious activity (triggers detailed report)
+  high: 0.8     # 80% - Likely threat
+
+# Gemini 2.5 Flash Configuration
+# Thinking levels are automatically selected based on investigation phase:
+# - Interval analysis: thinking_level="low" (fast triage)
+# - Triggered triage: thinking_level="low" (rapid assessment)
+# - Deep forensics: thinking_level="high" (comprehensive investigation)
+# - Report generation: thinking_level="high" (detailed reasoning)
+gemini:
+  model_pro: gemini-3-pro-preview
+  max_tokens: 1000000   # 1M token context window
+  temperature: 1.0      # Recommended for thinking models
+
+# Behavior-based Detection Triggers
+# System-wide monitoring (not location-specific)
+triggers:
+  suspicious_cmdline: true          # Command line pattern analysis
+  browser_spawns_shell: true        # Parent-child relationship detection
+  rapid_network_activity: true      # Network connection monitoring
+  unsigned_executable: true         # Suspicious file type detection
+  temp_spawn: true                  # Temporary directory execution (low priority)
+  registry_persistence: true        # Registry modification detection
+  memory_access_attempt: true       # Memory access pattern monitoring
+  
+  # Detection philosophy
+  system_wide: true                 # Monitor ALL processes
+  behavior_focused: true            # Prioritize behavior over location
+
+# Beta Prevention Features (Experimental)
+# WARNING: Only use in sandbox environments
+beta_prevention:
+  enabled: false
+  allowed_actions:
+    - suspend_process
+    - network_isolation
+    - file_quarantine
+  exclude_system_processes: true
+  require_confirmation: true
+  auto_rollback_minutes: 5
